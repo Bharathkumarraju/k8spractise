@@ -1,0 +1,29 @@
+[bharath@bharath k8spractise]$ kubectl get svc
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2d
+
+[bharath@bharath k8spractise]$ kubectl get rc
+NAME                        DESIRED   CURRENT   READY     AGE
+rajureplicationcontroller   7         7         7         1h
+
+
+[bharath@bharath k8spractise]$ kubectl describe rc
+Name:         rajureplicationcontroller
+Namespace:    default
+Selector:     app=hellobkraju
+Labels:       app=hellobkraju
+Annotations:  <none>
+Replicas:     7 current / 7 desired
+Pods Status:  7 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=hellobkraju
+  Containers:
+   hellobkrajucontainer:
+    Image:        nigelpoulton/pluralsight-docker-ci:latest
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:           <none>
+[bharath@bharath k8spractise]$ vim bkrajuservice.yml

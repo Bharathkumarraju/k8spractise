@@ -1,0 +1,15 @@
+--- # Defining service in manifest file and giving this to API Server in kube master
+apiVersion: v1
+kind: Service
+metadata:
+    name: hanumanservice
+    labels:
+      app: hellobkraju
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: hellobkraju

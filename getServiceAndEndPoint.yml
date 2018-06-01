@@ -1,0 +1,43 @@
+[bharath@bharath k8spractise]$ kubectl create -f bkrajuservice.yml
+service "hanumanservice" created
+[bharath@bharath k8spractise]$ kubectl get svc
+NAME             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+hanumanservice   NodePort    10.100.132.134   <none>        8080:30001/TCP   7s
+kubernetes       ClusterIP   10.96.0.1        <none>        443/TCP          2d
+[bharath@bharath k8spractise]$ kubectl get svc hanumanservice
+NAME             TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+hanumanservice   NodePort   10.100.132.134   <none>        8080:30001/TCP   13s
+[bharath@bharath k8spractise]$ kubectl describe svc hanumanservice
+Name:                     hanumanservice
+Namespace:                default
+Labels:                   app=hellobkraju
+Annotations:              <none>
+Selector:                 app=hellobkraju
+Type:                     NodePort
+IP:                       10.100.132.134
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  30001/TCP
+Endpoints:                10.36.0.12:8080,10.36.0.13:8080,10.36.0.14:8080 + 4 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+[bharath@bharath k8spractise]$ kubectl get ep hanumanservice
+NAME             ENDPOINTS                                                     AGE
+hanumanservice   10.36.0.12:8080,10.36.0.13:8080,10.36.0.14:8080 + 4 more...   34s
+
+[bharath@bharath k8spractise]$ kubectl describe ep hanumanservice
+Name:         hanumanservice
+Namespace:    default
+Labels:       app=hellobkraju
+Annotations:  <none>
+Subsets:
+  Addresses:          10.36.0.12,10.36.0.13,10.36.0.14,10.44.0.11,10.44.0.12,10.44.0.13,10.44.0.14
+  NotReadyAddresses:  <none>
+  Ports:
+    Name     Port  Protocol
+    ----     ----  --------
+    <unset>  8080  TCP
+
+Events:  <none>
+[bharath@bharath k8spractise]$
