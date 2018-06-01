@@ -1,0 +1,21 @@
+--- # Adding desired state to k8s Replication makes sures that always actual state matches the desired state
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: rajureplicationcontroller
+spec:
+  replicas: 7
+  selector:
+     app: hellobkraju
+  template:
+   metadata:
+    labels:
+      app: hellobkraju
+   spec:
+    containers:
+    - name: hellobkrajucontainer
+      image: nigelpoulton/pluralsight-docker-ci:latest
+      ports:
+      - containerPort: 9966
+ 
+   
