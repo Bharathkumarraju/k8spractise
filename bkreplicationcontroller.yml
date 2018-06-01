@@ -16,6 +16,6 @@ spec:
     - name: hellobkrajucontainer
       image: nigelpoulton/pluralsight-docker-ci:latest
       ports:
-      - containerPort: 9966
+      - containerPort: 8080 
  
    

@@ -1,0 +1,48 @@
+[bharath@bharath k8spractise]$ kubectl expose rc rajureplicationcontroller --name=rajuservice --target-port=9966 --type=NodePort
+service "rajuservice" exposed
+[bharath@bharath k8spractise]$
+
+
+[bharath@bharath k8spractise]$ kubectl describe service rajuservice
+Name:                     rajuservice
+Namespace:                default
+Labels:                   app=hellobkraju
+Annotations:              <none>
+Selector:                 app=hellobkraju
+Type:                     NodePort
+IP:                       10.103.15.29
+Port:                     <unset>  9966/TCP
+TargetPort:               9966/TCP
+NodePort:                 <unset>  30101/TCP
+Endpoints:                10.36.0.12:9966,10.36.0.13:9966,10.36.0.14:9966 + 4 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+[bharath@bharath k8spractise]$
+
+In browser type 10.103.15.29:30101
+
+[bharath@bharath k8spractise]$ kubectl expose rc rajureplicationcontroller --name=bkservice --target-port=8080 --type=NodePort
+service "bkservice" exposed
+[bharath@bharath k8spractise]$ kubectl describe service bkservice
+Name:                     bkservice
+Namespace:                default
+Labels:                   app=hellobkraju
+Annotations:              <none>
+Selector:                 app=hellobkraju
+Type:                     NodePort
+IP:                       10.102.188.101
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  31314/TCP
+Endpoints:                10.36.0.12:8080,10.36.0.13:8080,10.36.0.14:8080 + 4 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+[bharath@bharath k8spractise]$ sudo su
+[root@bharath k8spractise]# iptables --flush
+[root@bharath k8spractise]# getenforce
+Disabled
+[root@bharath k8spractise]#
+
+
