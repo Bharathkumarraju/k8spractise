@@ -1,0 +1,13 @@
+--- #bharaths hello world
+apiVersion: v1
+kind: Pod
+metadata: 
+   name: raju188
+   labels:
+     env: prod
+     version: v1
+spec:
+ containers:
+ - name: bkraju188
+   image: bharathkumarraju/voteapp_result 
+

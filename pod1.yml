@@ -1,0 +1,14 @@
+--- # Bharaths First Pod Deployment
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: hanuman-pod
+  labels:
+   zone: prod
+   version: v1 
+spec:
+  containers:
+  - name: hanuman1
+    image: nigelpoulton/pluralsight-docker-ci:latest
+    ports:
+    - containerPort: 9180

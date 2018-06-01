@@ -1,0 +1,23 @@
+--- # Bharaths First Pod Deployment
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: bks-multicontainer-pod
+  labels:
+   zone: prod
+   version: v1 
+spec:
+  containers:
+  - name: bks1
+    image: nigelpoulton/pluralsight-docker-ci:latest
+    ports:
+    - containerPort: 8180
+  - name: bks2
+    image: nigelpoulton/pluralsight-docker-ci:latest
+    ports:
+    - containerPort: 8182
+  - name: bks3
+    image: nigelpoulton/pluralsight-docker-ci:latest
+    ports:
+    - containerPort: 8183
+

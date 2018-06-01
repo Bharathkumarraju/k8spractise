@@ -1,0 +1,15 @@
+--- # Adding first hello pod by exposing on port 9999
+apiVersion: v1
+kind: Pod
+metadata:
+  name: helloraju
+  labels:
+    environment: prod
+    zone: dmz
+    version: v1
+spec:
+ containers: 
+ - name: rajucontainer
+   image: nigelpoulton/pluralsight-docker-ci:latest
+   ports:
+   - containerPort: 9999
