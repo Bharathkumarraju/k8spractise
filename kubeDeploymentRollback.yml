@@ -1,0 +1,113 @@
+[bharath@bharath k8spractise]$ kubectl rollout history deployment bharath-deploy
+deployments "bharath-deploy"
+REVISION  CHANGE-CAUSE
+1         <none>
+2         kubectl apply --filename=bkdeployments.yml --record=true
+
+[bharath@bharath k8spractise]$
+ 
+[bharath@bharath k8spractise]$ kubectl rollout undo deployment bharath-deploy --to-revision=1
+deployment.apps "bharath-deploy"
+[bharath@bharath k8spractise]$
+
+
+[bharath@bharath k8spractise]$ kubectl rollout history deployment bharath-deploy
+deployments "bharath-deploy"
+REVISION  CHANGE-CAUSE
+2         kubectl apply --filename=bkdeployments.yml --record=true
+3         <none>
+
+[bharath@bharath k8spractise]$ kubectl get deploy bharath-deploy
+NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+bharath-deploy   10        10        10           10          2h
+[bharath@bharath k8spractise]$ kubectl describe  deploy bharath-deploy
+Name:                   bharath-deploy
+Namespace:              default
+CreationTimestamp:      Sat, 02 Jun 2018 16:40:13 +0200
+Labels:                 app=hellobkraju
+Annotations:            deployment.kubernetes.io/revision=3
+                        kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"extensions/v1beta1","kind":"Deployment","metadata":{"annotations":{"kubernetes.io/change-cause":"kubectl apply --filename=bkdeployments....
+Selector:               app=hellobkraju
+Replicas:               10 desired | 10 updated | 10 total | 10 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        10
+RollingUpdateStrategy:  1 max unavailable, 1 max surge
+Pod Template:
+  Labels:  app=hellobkraju
+  Containers:
+   hello-raju-deployment:
+    Image:        nigelpoulton/pluralsight-docker-ci:latest
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   bharath-deploy-976844f59 (10/10 replicas created)
+Events:
+  Type    Reason              Age                From                   Message
+  ----    ------              ----               ----                   -------
+  Normal  DeploymentRollback  1m                 deployment-controller  Rolled back deployment "bharath-deploy" to revision 1
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled up replica set bharath-deploy-976844f59 to 1
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled down replica set bharath-deploy-6b55fdc85c to 9
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled up replica set bharath-deploy-976844f59 to 2
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled up replica set bharath-deploy-976844f59 to 3
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled down replica set bharath-deploy-6b55fdc85c to 8
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled down replica set bharath-deploy-6b55fdc85c to 7
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled up replica set bharath-deploy-976844f59 to 4
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled down replica set bharath-deploy-6b55fdc85c to 5
+  Normal  ScalingReplicaSet   1m                 deployment-controller  Scaled up replica set bharath-deploy-976844f59 to 6
+  Normal  ScalingReplicaSet   34s (x12 over 1h)  deployment-controller  (combined from similar events): Scaled down replica set bharath-deploy-6b55fdc85c to 0
+[bharath@bharath k8spractise]$
+
+
+
+
+
+[bharath@bharath k8spractise]$ kubectl get rs
+NAME                        DESIRED   CURRENT   READY     AGE
+bharath-deploy-6b55fdc85c   0         0         0         1h
+bharath-deploy-976844f59    10        10        10        2h
+[bharath@bharath k8spractise]$ kubectl describe rs bharath-deploy-976844f59
+Name:           bharath-deploy-976844f59
+Namespace:      default
+Selector:       app=hellobkraju,pod-template-hash=532400915
+Labels:         app=hellobkraju
+                pod-template-hash=532400915
+Annotations:    deployment.kubernetes.io/desired-replicas=10
+                deployment.kubernetes.io/max-replicas=11
+                deployment.kubernetes.io/revision=3
+                deployment.kubernetes.io/revision-history=1
+Controlled By:  Deployment/bharath-deploy
+Replicas:       10 current / 10 desired
+Pods Status:    10 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=hellobkraju
+           pod-template-hash=532400915
+  Containers:
+   hello-raju-deployment:
+    Image:        nigelpoulton/pluralsight-docker-ci:latest
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age              From                   Message
+  ----    ------            ----             ----                   -------
+  Normal  SuccessfulCreate  3m               replicaset-controller  Created pod: bharath-deploy-976844f59-hbsvg
+  Normal  SuccessfulCreate  3m               replicaset-controller  Created pod: bharath-deploy-976844f59-z62mb
+  Normal  SuccessfulCreate  2m               replicaset-controller  Created pod: bharath-deploy-976844f59-k4r8z
+  Normal  SuccessfulCreate  2m               replicaset-controller  Created pod: bharath-deploy-976844f59-6g78w
+  Normal  SuccessfulCreate  2m               replicaset-controller  Created pod: bharath-deploy-976844f59-5fnwk
+  Normal  SuccessfulCreate  2m               replicaset-controller  Created pod: bharath-deploy-976844f59-9xtlz
+  Normal  SuccessfulCreate  2m               replicaset-controller  Created pod: bharath-deploy-976844f59-shbsr
+  Normal  SuccessfulCreate  2m               replicaset-controller  Created pod: bharath-deploy-976844f59-4s2b4
+  Normal  SuccessfulCreate  2m (x2 over 2h)  replicaset-controller  (combined from similar events): Created pod: bharath-deploy-976844f59-g7mcs
+  Normal  SuccessfulCreate  2m               replicaset-controller  Created pod: bharath-deploy-976844f59-64bk9
+[bharath@bharath k8spractise]$

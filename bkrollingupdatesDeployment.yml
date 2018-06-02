@@ -1,0 +1,23 @@
+--- # bkrajus first deployment
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bharath-deploy
+spec:
+   replicas: 10
+   minReadySeconds: 10
+   template:
+     metadata:
+       labels:
+          app: hellobkraju
+     spec:
+       containers:
+       - name: hello-raju-deployment
+         image: nigelpoulton/pluralsight-docker-ci:edge
+         ports:
+         - containerPort: 8080 
+   strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate   

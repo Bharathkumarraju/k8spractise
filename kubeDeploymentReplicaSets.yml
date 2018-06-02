@@ -1,0 +1,32 @@
+[bharath@bharath k8spractise]$ kubectl get rs
+NAME                        DESIRED   CURRENT   READY     AGE
+bharath-deploy-6b55fdc85c   10        10        10        1h
+bharath-deploy-976844f59    0         0         0         2h
+
+
+[bharath@bharath k8spractise]$ kubectl describe  rs bharath-deploy-6b55fdc85c
+Name:           bharath-deploy-6b55fdc85c
+Namespace:      default
+Selector:       app=hellobkraju,pod-template-hash=2611987417
+Labels:         app=hellobkraju
+                pod-template-hash=2611987417
+Annotations:    deployment.kubernetes.io/desired-replicas=10
+                deployment.kubernetes.io/max-replicas=11
+                deployment.kubernetes.io/revision=2
+                kubernetes.io/change-cause=kubectl apply --filename=bkdeployments.yml --record=true
+Controlled By:  Deployment/bharath-deploy
+Replicas:       10 current / 10 desired
+Pods Status:    10 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=hellobkraju
+           pod-template-hash=2611987417
+  Containers:
+   hello-raju-deployment:
+    Image:        nigelpoulton/pluralsight-docker-ci:edge
+    Port:         8080/TCP
+    Host Port:    0/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:           <none>
+[bharath@bharath k8spractise]$

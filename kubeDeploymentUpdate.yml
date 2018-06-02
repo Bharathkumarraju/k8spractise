@@ -1,0 +1,17 @@
+[bharath@bharath k8spractise]$ kubectl apply -f bkdeployments.yml --record
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+deployment.extensions "bharath-deploy" configured
+[bharath@bharath k8spractise]$
+
+
+[bharath@bharath k8spractise]$ kubectl rollout status deployment bharath-deploy
+deployment "bharath-deploy" successfully rolled out
+[bharath@bharath k8spractise]$ kubectl rollout history deployment bharath-deploy
+deployments "bharath-deploy"
+REVISION  CHANGE-CAUSE
+1         <none>
+2         kubectl apply --filename=bkdeployments.yml --record=true
+
+[bharath@bharath k8spractise]$
+
+
