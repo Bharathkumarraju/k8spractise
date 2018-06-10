@@ -1,8 +1,27 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: default-mem-demo
+  name: exampleresource 
 spec:
   containers:
-  - name: default-mem-demo-ctr
-    image: nginx
+   - name: container1 
+     image: nginx
+     resources:
+       requests:
+         memory: "32Mi"
+         cpu: "200m"
+       limits:
+         memory: "64Mi"
+         cpu: "250m"
+
+  containers:
+   - name: container2
+     image: nginx
+     resources:
+       requests:
+          memory: "92Mi"
+          cpu: "300m"
+       limits:
+          memory: "164Mi"
+          cpu: "350m" 
+
